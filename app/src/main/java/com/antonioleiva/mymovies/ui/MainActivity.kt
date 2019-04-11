@@ -1,15 +1,13 @@
 package com.antonioleiva.mymovies.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.model.MovieDb
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.antonioleiva.mymovies.model.MovieDb
+import com.antonioleiva.mymovies.ui.common.CoroutineScopeActivity
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CoroutineScopeActivity() {
 
     private val adapter = MoviesAdapter()
 
@@ -20,10 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.recycler.adapter = adapter
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val movies = MovieDb.service.listPopularMoviesAsync(getString(
-                R.string.api_key
-            ))
+        launch {
+            val movies = MovieDb.service
+                .listPopularMoviesAsync(getString(R.string.api_key))
             adapter.movies = movies.results
         }
     }
