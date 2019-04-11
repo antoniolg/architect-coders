@@ -4,10 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.antonioleiva.mymovies.model.Movie
 import com.antonioleiva.mymovies.R
-import kotlin.properties.Delegates
+import com.antonioleiva.mymovies.model.Movie
 import kotlinx.android.synthetic.main.view_movie.view.*
+import kotlin.properties.Delegates
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
@@ -39,6 +39,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) {
             itemView.movieTitle.text = movie.title
+            itemView.movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
         }
     }
 }
