@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.ui
 
 import android.content.Context
 import android.view.LayoutInflater

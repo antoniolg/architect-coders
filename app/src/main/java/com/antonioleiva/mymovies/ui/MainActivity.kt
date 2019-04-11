@@ -1,7 +1,9 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.antonioleiva.mymovies.R
+import com.antonioleiva.mymovies.model.MovieDb
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapter
 
         GlobalScope.launch(Dispatchers.Main) {
-            val movies = MovieDb.service.listPopularMoviesAsync(getString(R.string.api_key))
+            val movies = MovieDb.service.listPopularMoviesAsync(getString(
+                R.string.api_key
+            ))
             adapter.movies = movies.results
         }
     }

@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.model
 
 import com.google.gson.annotations.SerializedName
 
