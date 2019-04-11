@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.model
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

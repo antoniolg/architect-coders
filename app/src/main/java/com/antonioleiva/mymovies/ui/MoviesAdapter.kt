@@ -1,10 +1,12 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.ui
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.antonioleiva.mymovies.databinding.ViewMovieBinding
+import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.R
 import kotlin.properties.Delegates
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
