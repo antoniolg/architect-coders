@@ -23,7 +23,11 @@ class MainActivity : CoroutineScopeActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val adapter = MoviesAdapter()
+    private val adapter = MoviesAdapter {
+        startActivity<DetailActivity> {
+            putExtra(DetailActivity.MOVIE, it)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

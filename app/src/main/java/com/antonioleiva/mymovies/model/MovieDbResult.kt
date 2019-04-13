@@ -1,6 +1,8 @@
 package com.antonioleiva.mymovies.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class MovieDbResult(
     val page: Int,
@@ -9,6 +11,7 @@ data class MovieDbResult(
     @SerializedName("total_results") val totalResults: Int
 )
 
+@Parcelize
 data class Movie(
     val adult: Boolean,
     @SerializedName("backdrop_path") val backdropPath: String?,
@@ -24,4 +27,4 @@ data class Movie(
     val video: Boolean,
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("vote_count") val voteCount: Int
-)
+) : Parcelable
