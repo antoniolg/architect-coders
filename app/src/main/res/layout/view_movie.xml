@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="2dp">
+    android:padding="2dp"
+    android:foreground="?attr/selectableItemBackground">
 
     <com.antonioleiva.mymovies.ui.common.AspectRatioImageView
         android:id="@+id/movieCover"

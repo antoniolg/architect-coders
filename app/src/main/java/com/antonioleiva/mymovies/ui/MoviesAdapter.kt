@@ -9,7 +9,8 @@ import com.antonioleiva.mymovies.databinding.ViewMovieBinding
 import com.antonioleiva.mymovies.model.Movie
 import kotlin.properties.Delegates
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val listener: (Movie) -> Unit) :
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     var movies: List<Movie> by Delegates.observable(emptyList()) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -33,7 +34,9 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(movies[position])
+        val movie = movies[position]
+        holder.bind(movie)
+        holder.itemView.setOnClickListener { listener(movie) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
