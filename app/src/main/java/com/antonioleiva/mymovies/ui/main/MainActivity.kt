@@ -1,9 +1,11 @@
-package com.antonioleiva.mymovies.ui
+package com.antonioleiva.mymovies.ui.main
 
 import android.os.Bundle
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
 import com.antonioleiva.mymovies.model.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.CoroutineScopeActivity
+import com.antonioleiva.mymovies.ui.common.startActivity
+import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import kotlinx.coroutines.launch
 
 class MainActivity : CoroutineScopeActivity() {

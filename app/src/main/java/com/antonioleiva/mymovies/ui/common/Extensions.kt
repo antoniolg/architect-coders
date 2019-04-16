@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies.ui
+package com.antonioleiva.mymovies.ui.common
 
 import android.app.Activity
 import android.content.Context

@@ -1,10 +1,11 @@
-package com.antonioleiva.mymovies.ui
+package com.antonioleiva.mymovies.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
 import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.ui.common.loadUrl
 
 class DetailActivity : AppCompatActivity() {
 
