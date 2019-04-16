@@ -1,6 +1,7 @@
 package com.antonioleiva.mymovies.ui.main
 
 import android.os.Bundle
+import android.view.View
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.CoroutineScopeActivity
@@ -26,7 +27,9 @@ class MainActivity : CoroutineScopeActivity() {
         recycler.adapter = adapter
 
         launch {
+            progress.visibility = View.VISIBLE
             adapter.movies = moviesRepository.findPopularMovies().results
+            progress.visibility = View.GONE
         }
     }
 }
