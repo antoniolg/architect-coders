@@ -7,27 +7,36 @@ import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
 import com.antonioleiva.mymovies.model.Movie
 import com.antonioleiva.mymovies.ui.common.loadUrl
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailPresenter.View {
 
     companion object {
         const val MOVIE = "DetailActivity:movie"
     }
 
+    private val presenter = DetailPresenter()
+    private lateinit var binding: ActivityDetailBinding
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ActivityDetailBinding.inflate(layoutInflater).run {
-            setContentView(root)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val movie: Movie = intent.getParcelableExtra(MOVIE)
+            ?: throw (IllegalStateException("Movie not found"))
 
-            val movie = intent.getParcelableExtra<Movie>(MOVIE) ?: throw IllegalStateException()
+        presenter.onCreate(this@DetailActivity, movie)
+    }
 
-            movieDetailToolbar.title = movie.title
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 
-            val background = movie.backdropPath ?: movie.posterPath
-            movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780$background")
-            movieDetailSummary.text = movie.overview
-            movieDetailInfo.setMovie(movie)
-        }
+    override fun updateUI(movie: Movie) = with(binding) {
+        movieDetailToolbar.title = movie.title
+        movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
+        movieDetailSummary.text = movie.overview
+        movieDetailInfo.setMovie(movie)
     }
 }
