@@ -1,10 +1,13 @@
-package com.antonioleiva.mymovies.ui
+package com.antonioleiva.mymovies.ui.main
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.ui.common.basicDiffUtil
+import com.antonioleiva.mymovies.ui.common.inflate
+import com.antonioleiva.mymovies.ui.common.loadUrl
 import kotlinx.android.synthetic.main.view_movie.view.*
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) :

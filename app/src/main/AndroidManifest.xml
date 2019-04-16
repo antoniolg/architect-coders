@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.DetailActivity"
+        <activity android:name=".ui.detail.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
