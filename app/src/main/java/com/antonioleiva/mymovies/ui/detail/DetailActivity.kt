@@ -3,17 +3,20 @@ package com.antonioleiva.mymovies.ui.detail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
 import com.antonioleiva.mymovies.model.Movie
 import com.antonioleiva.mymovies.ui.common.loadUrl
 
-class DetailActivity : AppCompatActivity(), DetailPresenter.View {
+class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val MOVIE = "DetailActivity:movie"
     }
 
-    private val presenter = DetailPresenter()
+    private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
 
     @SuppressLint("SetTextI18n")
@@ -25,15 +28,16 @@ class DetailActivity : AppCompatActivity(), DetailPresenter.View {
         val movie: Movie = intent.getParcelableExtra(MOVIE)
             ?: throw (IllegalStateException("Movie not found"))
 
-        presenter.onCreate(this@DetailActivity, movie)
+        viewModel = ViewModelProvider(
+            this,
+            DetailViewModelFactory(movie)
+        ).get()
+
+        viewModel.model.observe(this, Observer(::updateUi))
     }
 
-    override fun onDestroy() {
-        presenter.onDestroy()
-        super.onDestroy()
-    }
-
-    override fun updateUI(movie: Movie) = with(binding) {
+    private fun updateUi(model: DetailViewModel.UiModel) = with(binding) {
+        val movie = model.movie
         movieDetailToolbar.title = movie.title
         movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
         movieDetailSummary.text = movie.overview
