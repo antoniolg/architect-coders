@@ -3,7 +3,6 @@ package com.antonioleiva.mymovies.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.antonioleiva.mymovies.model.Movie
 import com.antonioleiva.mymovies.model.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.Scope
@@ -44,11 +43,4 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
         destroyScope()
         super.onCleared()
     }
-}
-
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(private val moviesRepository: MoviesRepository) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        MainViewModel(moviesRepository) as T
 }
