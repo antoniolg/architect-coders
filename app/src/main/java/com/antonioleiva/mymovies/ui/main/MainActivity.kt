@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.MoviesRepository
+import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.main.MainViewModel.UiModel
@@ -22,10 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(MoviesRepository(this))
-        ).get()
+        viewModel = getViewModel { MainViewModel(MoviesRepository(this)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
