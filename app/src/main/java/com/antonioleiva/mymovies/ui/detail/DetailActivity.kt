@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
 import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
+import java.lang.IllegalStateException
 
 class DetailActivity : AppCompatActivity() {
 
@@ -28,10 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val movie: Movie = intent.getParcelableExtra(MOVIE)
             ?: throw (IllegalStateException("Movie not found"))
 
-        viewModel = ViewModelProvider(
-            this,
-            DetailViewModelFactory(movie)
-        ).get()
+        viewModel = getViewModel { DetailViewModel(movie) }
 
         viewModel.model.observe(this, Observer(::updateUi))
     }

@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
 import com.antonioleiva.mymovies.model.MoviesRepository
+import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.main.MainViewModel.UiModel
@@ -23,10 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(MoviesRepository(this))
-        ).get()
+        viewModel = getViewModel { MainViewModel(MoviesRepository(this)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         binding.recycler.adapter = adapter
