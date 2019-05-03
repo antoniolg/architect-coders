@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.antonioleiva.mymovies.PermissionRequester
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
-import com.antonioleiva.mymovies.model.MoviesRepository
+import com.antonioleiva.mymovies.model.server.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity

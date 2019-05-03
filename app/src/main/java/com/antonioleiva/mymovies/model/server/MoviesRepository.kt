@@ -1,7 +1,8 @@
-package com.antonioleiva.mymovies.model
+package com.antonioleiva.mymovies.model.server
 
 import android.app.Application
 import com.antonioleiva.mymovies.R
+import com.antonioleiva.mymovies.model.RegionRepository
 
 class MoviesRepository(application: Application) {
 

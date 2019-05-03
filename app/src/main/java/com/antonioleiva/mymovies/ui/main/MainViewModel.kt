@@ -3,8 +3,8 @@ package com.antonioleiva.mymovies.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.antonioleiva.mymovies.model.Movie
-import com.antonioleiva.mymovies.model.MoviesRepository
+import com.antonioleiva.mymovies.model.server.Movie
+import com.antonioleiva.mymovies.model.server.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.Scope
 import kotlinx.coroutines.launch
 
