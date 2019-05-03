@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
-import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.model.server.Movie
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
 import java.lang.IllegalStateException

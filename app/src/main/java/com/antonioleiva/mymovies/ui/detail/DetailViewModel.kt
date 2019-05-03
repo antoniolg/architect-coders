@@ -3,7 +3,7 @@ package com.antonioleiva.mymovies.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.antonioleiva.mymovies.model.Movie
+import com.antonioleiva.mymovies.model.server.Movie
 
 class DetailViewModel(private val movie: Movie) : ViewModel() {
 
