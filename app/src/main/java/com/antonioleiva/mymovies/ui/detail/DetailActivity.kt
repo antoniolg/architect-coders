@@ -3,7 +3,9 @@ package com.antonioleiva.mymovies.ui.detail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
 import com.antonioleiva.mymovies.model.server.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.app
@@ -30,6 +32,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
         viewModel.model.observe(this, Observer(::updateUi))
+
+        binding.movieDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
     }
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(binding) {
@@ -38,5 +42,8 @@ class DetailActivity : AppCompatActivity() {
         movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
         movieDetailSummary.text = movie.overview
         movieDetailInfo.setMovie(movie)
+
+        val icon = if (movie.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+        movieDetailFavorite.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, icon))
     }
 }
