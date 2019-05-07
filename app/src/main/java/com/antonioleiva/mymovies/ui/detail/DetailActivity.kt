@@ -29,6 +29,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
         viewModel.model.observe(this, Observer(::updateUi))
+
+        movieDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
     }
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(model.movie) {
@@ -36,5 +38,8 @@ class DetailActivity : AppCompatActivity() {
         movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780$backdropPath")
         movieDetailSummary.text = overview
         movieDetailInfo.setMovie(this)
+
+        val icon = if (favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+        movieDetailFavorite.setImageDrawable(getDrawable(icon))
     }
 }
