@@ -2,14 +2,12 @@ package com.antonioleiva.mymovies.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.antonioleiva.mymovies.model.server.Movie
+import com.antonioleiva.mymovies.model.database.Movie
 import com.antonioleiva.mymovies.model.server.MoviesRepository
-import com.antonioleiva.mymovies.ui.common.Scope
+import com.antonioleiva.mymovies.ui.common.ScopedViewModel
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(),
-    Scope by Scope.Impl() {
+class MainViewModel(private val moviesRepository: MoviesRepository) : ScopedViewModel() {
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
@@ -36,7 +34,7 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = UiModel.Loading
-            _model.value = UiModel.Content(moviesRepository.findPopularMovies().results)
+            _model.value = UiModel.Content(moviesRepository.findPopularMovies())
         }
     }
 
