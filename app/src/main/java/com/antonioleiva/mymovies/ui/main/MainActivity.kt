@@ -1,9 +1,11 @@
 package com.antonioleiva.mymovies.ui.main
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.antonioleiva.mymovies.PermissionRequester
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
 import com.antonioleiva.mymovies.model.MoviesRepository
 import com.antonioleiva.mymovies.ui.common.getViewModel
@@ -16,13 +18,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MoviesAdapter
+    private val coarsePermissionRequester = PermissionRequester(this, ACCESS_COARSE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = getViewModel { MainViewModel(MoviesRepository(this)) }
+        viewModel = getViewModel { MainViewModel(MoviesRepository(application)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         binding.recycler.adapter = adapter
@@ -37,6 +40,9 @@ class MainActivity : AppCompatActivity() {
             is UiModel.Content -> adapter.movies = model.movies
             is UiModel.Navigation -> startActivity<DetailActivity> {
                 putExtra(DetailActivity.MOVIE, model.movie)
+            }
+            UiModel.RequestLocationPermission -> coarsePermissionRequester.request {
+                viewModel.onCoarsePermissionRequested()
             }
         }
     }
