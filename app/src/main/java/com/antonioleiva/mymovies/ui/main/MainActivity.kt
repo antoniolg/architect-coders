@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.antonioleiva.mymovies.PermissionRequester
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.server.MoviesRepository
+import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = getViewModel { MainViewModel(MoviesRepository(application)) }
+        viewModel = getViewModel { MainViewModel(MoviesRepository(app)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         when (model) {
             is UiModel.Content -> adapter.movies = model.movies
             is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.MOVIE, model.movie)
+                putExtra(DetailActivity.MOVIE, model.movie.id)
             }
             UiModel.RequestLocationPermission -> coarsePermissionRequester.request {
                 viewModel.onCoarsePermissionRequested()

@@ -32,7 +32,7 @@
                 android:id="@+id/movieDetailToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Movie name" />
+                tools:title="Movie name" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
