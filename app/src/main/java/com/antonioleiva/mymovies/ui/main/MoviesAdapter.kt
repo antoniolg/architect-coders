@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ViewMovieBinding
-import com.antonioleiva.mymovies.model.server.Movie
+import com.antonioleiva.mymovies.model.database.Movie
 import com.antonioleiva.mymovies.ui.common.basicDiffUtil
 import com.antonioleiva.mymovies.ui.common.inflate
 import com.antonioleiva.mymovies.ui.common.loadUrl

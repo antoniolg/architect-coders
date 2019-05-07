@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
-import com.antonioleiva.mymovies.model.server.Movie
+import com.antonioleiva.mymovies.model.server.MoviesRepository
+import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
-import java.lang.IllegalStateException
 
 class DetailActivity : AppCompatActivity() {
 
@@ -22,13 +22,12 @@ class DetailActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val movie: Movie = intent.getParcelableExtra(MOVIE)
-            ?: throw (IllegalStateException("Movie not found"))
 
-        viewModel = getViewModel { DetailViewModel(movie) }
+        viewModel = getViewModel {
+            DetailViewModel(intent.getIntExtra(MOVIE, -1), MoviesRepository(app))
+        }
 
         viewModel.model.observe(this, Observer(::updateUi))
     }
