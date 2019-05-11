@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="2dp"
-    android:foreground="?attr/selectableItemBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.antonioleiva.mymovies.ui.common.AspectRatioImageView
-        android:id="@+id/movieCover"
+    <data>
+        <variable
+            name="movie"
+            type="com.antonioleiva.mymovies.model.database.Movie" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ratio="1.5"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="2dp">
 
-    <TextView
-        android:id="@+id/movieTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:padding="8dp"
-        android:lines="2"
-        android:minLines="2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
-        tools:text="@tools:sample/lorem" />
+        <com.antonioleiva.mymovies.ui.common.AspectRatioImageView
+            android:id="@+id/movieCover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:ratio="1.5"
+            app:url="@{movie.posterPath}"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:lines="2"
+            android:minLines="2"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:text="@{movie.title}"
+            tools:text="@tools:sample/lorem" />
+
+    </LinearLayout>
+</layout>

@@ -1,14 +1,12 @@
 package com.antonioleiva.mymovies.ui.main
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ViewMovieBinding
 import com.antonioleiva.mymovies.model.database.Movie
 import com.antonioleiva.mymovies.ui.common.basicDiffUtil
-import com.antonioleiva.mymovies.ui.common.inflate
-import com.antonioleiva.mymovies.ui.common.loadUrl
+import com.antonioleiva.mymovies.ui.common.bindingInflate
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -18,24 +16,16 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
         areItemsTheSame = { old, new -> old.id == new.id }
     )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.view_movie, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(parent.bindingInflate(R.layout.view_movie, false))
 
     override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
-        holder.bind(movie)
+        holder.dataBinding.movie = movie
         holder.itemView.setOnClickListener { listener(movie) }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ViewMovieBinding.bind(view)
-        fun bind(movie: Movie) = with(binding) {
-            movieTitle.text = movie.title
-            movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
-        }
-    }
+    class ViewHolder(val dataBinding: ViewMovieBinding) : RecyclerView.ViewHolder(dataBinding.root)
 }
