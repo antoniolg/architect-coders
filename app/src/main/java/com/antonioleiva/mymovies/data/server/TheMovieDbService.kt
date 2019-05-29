@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies.model.server
+package com.antonioleiva.mymovies.data.server
 
 import retrofit2.http.GET
 import retrofit2.http.Query
