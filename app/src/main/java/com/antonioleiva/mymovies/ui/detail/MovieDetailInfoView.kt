@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.antonioleiva.mymovies.model.database.Movie
+import com.antonioleiva.domain.Movie
 
 class MovieDetailInfoView @JvmOverloads constructor(
     context: Context,
