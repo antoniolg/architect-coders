@@ -5,14 +5,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.antonioleiva.data.repository.MoviesRepository
+import com.antonioleiva.data.repository.RegionRepository
 import com.antonioleiva.mymovies.PermissionRequester
+import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
-import com.antonioleiva.mymovies.model.server.MoviesRepository
+import com.antonioleiva.mymovies.model.AndroidPermissionChecker
+import com.antonioleiva.mymovies.model.PlayServicesLocationDataSource
+import com.antonioleiva.mymovies.model.database.RoomDataSource
+import com.antonioleiva.mymovies.model.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.main.MainViewModel.UiModel
+import com.antonioleiva.usecases.GetPopularMovies
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +33,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = getViewModel { MainViewModel(MoviesRepository(app)) }
+        viewModel = getViewModel {
+            MainViewModel(
+                GetPopularMovies(
+                    MoviesRepository(
+                        RoomDataSource(app.db),
+                        TheMovieDbDataSource(),
+                        RegionRepository(
+                            PlayServicesLocationDataSource(app),
+                            AndroidPermissionChecker(app)
+                        ),
+                        app.getString(R.string.api_key)
+                    )
+                )
+            )
+        }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         binding.recycler.adapter = adapter
