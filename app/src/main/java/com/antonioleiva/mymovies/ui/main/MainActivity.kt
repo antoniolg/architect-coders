@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.antonioleiva.data.repository.MoviesRepository
 import com.antonioleiva.data.repository.RegionRepository
-import com.antonioleiva.mymovies.PermissionRequester
+import com.antonioleiva.mymovies.ui.common.PermissionRequester
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.model.AndroidPermissionChecker
-import com.antonioleiva.mymovies.model.PlayServicesLocationDataSource
-import com.antonioleiva.mymovies.model.database.RoomDataSource
-import com.antonioleiva.mymovies.model.server.TheMovieDbDataSource
+import com.antonioleiva.mymovies.data.AndroidPermissionChecker
+import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
+import com.antonioleiva.mymovies.data.database.RoomDataSource
+import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MoviesAdapter
-    private val coarsePermissionRequester = PermissionRequester(this, ACCESS_COARSE_LOCATION)
+    private val coarsePermissionRequester =
+        PermissionRequester(this, ACCESS_COARSE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

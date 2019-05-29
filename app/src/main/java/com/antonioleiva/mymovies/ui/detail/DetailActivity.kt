@@ -7,10 +7,10 @@ import androidx.lifecycle.Observer
 import com.antonioleiva.data.repository.MoviesRepository
 import com.antonioleiva.data.repository.RegionRepository
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.model.AndroidPermissionChecker
-import com.antonioleiva.mymovies.model.PlayServicesLocationDataSource
-import com.antonioleiva.mymovies.model.database.RoomDataSource
-import com.antonioleiva.mymovies.model.server.TheMovieDbDataSource
+import com.antonioleiva.mymovies.data.AndroidPermissionChecker
+import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
+import com.antonioleiva.mymovies.data.database.RoomDataSource
+import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl

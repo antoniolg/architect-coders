@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies.model
+package com.antonioleiva.mymovies.data
 
 import android.annotation.SuppressLint
 import android.app.Application

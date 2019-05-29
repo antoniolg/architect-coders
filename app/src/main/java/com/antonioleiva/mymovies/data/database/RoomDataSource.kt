@@ -1,9 +1,9 @@
-package com.antonioleiva.mymovies.model.database
+package com.antonioleiva.mymovies.data.database
 
 import com.antonioleiva.data.source.LocalDataSource
 import com.antonioleiva.domain.Movie
-import com.antonioleiva.mymovies.model.toDomainMovie
-import com.antonioleiva.mymovies.model.toRoomMovie
+import com.antonioleiva.mymovies.data.toDomainMovie
+import com.antonioleiva.mymovies.data.toRoomMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

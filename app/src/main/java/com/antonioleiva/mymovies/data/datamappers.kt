@@ -1,8 +1,8 @@
-package com.antonioleiva.mymovies.model
+package com.antonioleiva.mymovies.data
 
 import com.antonioleiva.domain.Movie
-import com.antonioleiva.mymovies.model.database.Movie as DomainMovie
-import com.antonioleiva.mymovies.model.server.Movie as ServerMovie
+import com.antonioleiva.mymovies.data.database.Movie as DomainMovie
+import com.antonioleiva.mymovies.data.server.Movie as ServerMovie
 
 fun Movie.toRoomMovie(): DomainMovie =
     DomainMovie(
