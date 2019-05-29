@@ -4,11 +4,18 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.antonioleiva.data.repository.MoviesRepository
+import com.antonioleiva.data.repository.RegionRepository
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.model.server.MoviesRepository
+import com.antonioleiva.mymovies.model.AndroidPermissionChecker
+import com.antonioleiva.mymovies.model.PlayServicesLocationDataSource
+import com.antonioleiva.mymovies.model.database.RoomDataSource
+import com.antonioleiva.mymovies.model.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
+import com.antonioleiva.usecases.FindMovieById
+import com.antonioleiva.usecases.ToggleMovieFavorite
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -25,7 +32,21 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         viewModel = getViewModel {
-            DetailViewModel(intent.getIntExtra(MOVIE, -1), MoviesRepository(app))
+            val moviesRepository = MoviesRepository(
+                RoomDataSource(app.db),
+                TheMovieDbDataSource(),
+                RegionRepository(
+                    PlayServicesLocationDataSource(app),
+                    AndroidPermissionChecker(app)
+                ),
+                app.getString(R.string.api_key)
+            )
+
+            DetailViewModel(
+                intent.getIntExtra(MOVIE, -1),
+                FindMovieById(moviesRepository),
+                ToggleMovieFavorite(moviesRepository)
+            )
         }
 
         viewModel.model.observe(this, Observer(::updateUi))
