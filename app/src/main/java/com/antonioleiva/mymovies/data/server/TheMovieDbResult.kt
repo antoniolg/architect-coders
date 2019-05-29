@@ -1,4 +1,4 @@
-package com.antonioleiva.mymovies.model.server
+package com.antonioleiva.mymovies.data.server
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

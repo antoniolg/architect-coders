@@ -2,7 +2,7 @@ package com.antonioleiva.mymovies
 
 import android.app.Application
 import androidx.room.Room
-import com.antonioleiva.mymovies.model.database.MovieDatabase
+import com.antonioleiva.mymovies.data.database.MovieDatabase
 
 class MoviesApp : Application() {
 
