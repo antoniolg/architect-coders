@@ -5,48 +5,26 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.antonioleiva.data.repository.MoviesRepository
-import com.antonioleiva.data.repository.RegionRepository
-import com.antonioleiva.mymovies.ui.common.PermissionRequester
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.data.AndroidPermissionChecker
-import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
-import com.antonioleiva.mymovies.data.database.RoomDataSource
-import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
+import com.antonioleiva.mymovies.ui.common.PermissionRequester
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.startActivity
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.main.MainViewModel.UiModel
-import com.antonioleiva.usecases.GetPopularMovies
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MoviesAdapter
     private val coarsePermissionRequester =
         PermissionRequester(this, ACCESS_COARSE_LOCATION)
 
+    private val viewModel: MainViewModel by lazy { getViewModel { app.component.mainViewModel } }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel = getViewModel {
-            MainViewModel(
-                GetPopularMovies(
-                    MoviesRepository(
-                        RoomDataSource(app.db),
-                        TheMovieDbDataSource(),
-                        RegionRepository(
-                            PlayServicesLocationDataSource(app),
-                            AndroidPermissionChecker(app)
-                        ),
-                        app.getString(R.string.api_key)
-                    )
-                )
-            )
-        }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter

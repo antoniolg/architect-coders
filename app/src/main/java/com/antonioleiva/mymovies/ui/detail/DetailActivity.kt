@@ -4,18 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.antonioleiva.data.repository.MoviesRepository
-import com.antonioleiva.data.repository.RegionRepository
 import com.antonioleiva.mymovies.R
-import com.antonioleiva.mymovies.data.AndroidPermissionChecker
-import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
-import com.antonioleiva.mymovies.data.database.RoomDataSource
-import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
-import com.antonioleiva.usecases.FindMovieById
-import com.antonioleiva.usecases.ToggleMovieFavorite
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -24,30 +16,13 @@ class DetailActivity : AppCompatActivity() {
         const val MOVIE = "DetailActivity:movie"
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel by lazy { getViewModel { app.component.detaiViewModel } }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_detail)
-
-        viewModel = getViewModel {
-            val moviesRepository = MoviesRepository(
-                RoomDataSource(app.db),
-                TheMovieDbDataSource(),
-                RegionRepository(
-                    PlayServicesLocationDataSource(app),
-                    AndroidPermissionChecker(app)
-                ),
-                app.getString(R.string.api_key)
-            )
-
-            DetailViewModel(
-                intent.getIntExtra(MOVIE, -1),
-                FindMovieById(moviesRepository),
-                ToggleMovieFavorite(moviesRepository)
-            )
-        }
 
         viewModel.model.observe(this, Observer(::updateUi))
 
