@@ -5,19 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import com.antonioleiva.data.repository.MoviesRepository
-import com.antonioleiva.data.repository.RegionRepository
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
-import com.antonioleiva.mymovies.data.AndroidPermissionChecker
-import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
-import com.antonioleiva.mymovies.data.database.RoomDataSource
-import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.common.app
 import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
-import com.antonioleiva.usecases.FindMovieById
-import com.antonioleiva.usecases.ToggleMovieFavorite
 
 class DetailActivity : AppCompatActivity() {
 
@@ -25,32 +17,15 @@ class DetailActivity : AppCompatActivity() {
         const val MOVIE = "DetailActivity:movie"
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel by lazy { getViewModel { app.component.detaiViewModel } }
     private lateinit var binding: ActivityDetailBinding
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = getViewModel {
-            val moviesRepository = MoviesRepository(
-                RoomDataSource(app.db),
-                TheMovieDbDataSource(),
-                RegionRepository(
-                    PlayServicesLocationDataSource(app),
-                    AndroidPermissionChecker(app)
-                ),
-                app.getString(R.string.api_key)
-            )
-
-            DetailViewModel(
-                intent.getIntExtra(MOVIE, -1),
-                FindMovieById(moviesRepository),
-                ToggleMovieFavorite(moviesRepository)
-            )
-        }
 
         viewModel.model.observe(this, Observer(::updateUi))
 
