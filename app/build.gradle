@@ -62,8 +62,7 @@ dependencies {
 
     implementation 'com.karumi:dexter:6.2.2'
 
-    implementation 'com.google.dagger:dagger:2.32'
-    kapt 'com.google.dagger:dagger-compiler:2.32'
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test:runner:1.3.0'
