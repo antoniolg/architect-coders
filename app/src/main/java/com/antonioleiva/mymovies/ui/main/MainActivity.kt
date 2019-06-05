@@ -20,11 +20,14 @@ class MainActivity : AppCompatActivity() {
     private val coarsePermissionRequester =
         PermissionRequester(this, ACCESS_COARSE_LOCATION)
 
-    private val viewModel: MainViewModel by lazy { getViewModel { app.component.mainViewModel } }
+    private lateinit var component: MainActivityComponent
+    private val viewModel: MainViewModel by lazy { getViewModel { component.mainViewModel } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        component = app.component.plus(MainActivityModule())
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
