@@ -54,7 +54,7 @@ allprojects {
 
         testLibs = [
                 junit        : 'junit:junit:4.13.1',
-                mockitoKotlin: 'com.nhaarman.mockitokotlin2:mockito-kotlin:3.2.0',
+                mockitoKotlin: 'org.mockito.kotlin:mockito-kotlin:3.2.0',
                 mockitoInline: 'org.mockito:mockito-inline:3.12.4'
         ]
 
