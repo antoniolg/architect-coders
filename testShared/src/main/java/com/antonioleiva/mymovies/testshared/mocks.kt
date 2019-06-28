@@ -1,8 +1,8 @@
-package com.antonioleiva.usecases
+package com.antonioleiva.mymovies.testshared
 
 import com.antonioleiva.domain.Movie
 
-internal val mockedMovie = Movie(
+val mockedMovie = Movie(
     0,
     "Title",
     "Overview",

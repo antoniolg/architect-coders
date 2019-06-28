@@ -1,6 +1,7 @@
 package com.antonioleiva.usecases
 
 import com.antonioleiva.data.repository.MoviesRepository
+import com.antonioleiva.mymovies.testshared.mockedMovie
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse

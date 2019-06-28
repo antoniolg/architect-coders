@@ -2,7 +2,7 @@ package com.antonioleiva.data.repository
 
 import com.antonioleiva.data.source.LocalDataSource
 import com.antonioleiva.data.source.RemoteDataSource
-import com.antonioleiva.domain.Movie
+import com.antonioleiva.mymovies.testshared.mockedMovie
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -89,18 +89,4 @@ class MoviesRepositoryTest {
             verify(localDataSource).update(movie)
         }
     }
-
-    private val mockedMovie = Movie(
-        0,
-        "Title",
-        "Overview",
-        "01/01/2025",
-        "",
-        "",
-        "EN",
-        "Title",
-        5.0,
-        5.1,
-        false
-    )
 }
