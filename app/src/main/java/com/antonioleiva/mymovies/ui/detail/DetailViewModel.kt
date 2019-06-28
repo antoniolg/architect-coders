@@ -6,16 +6,18 @@ import com.antonioleiva.domain.Movie
 import com.antonioleiva.mymovies.ui.common.ScopedViewModel
 import com.antonioleiva.usecases.FindMovieById
 import com.antonioleiva.usecases.ToggleMovieFavorite
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val movieId: Int,
     private val findMovieById: FindMovieById,
-    private val toggleMovieFavorite: ToggleMovieFavorite
+    private val toggleMovieFavorite: ToggleMovieFavorite,
+    override val uiDispatcher: CoroutineDispatcher
 ) :
-    ScopedViewModel() {
+    ScopedViewModel(uiDispatcher) {
 
-    class UiModel(val movie: Movie)
+    data class UiModel(val movie: Movie)
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>

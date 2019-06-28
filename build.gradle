@@ -55,7 +55,12 @@ allprojects {
         testLibs = [
                 junit        : 'junit:junit:4.13.1',
                 mockitoKotlin: 'org.mockito.kotlin:mockito-kotlin:3.2.0',
-                mockitoInline: 'org.mockito:mockito-inline:3.12.4'
+                mockitoInline: 'org.mockito:mockito-inline:3.12.4',
+                testShared: project(':testShared')
+        ]
+
+        androidxTestLibs = [
+                archCoreTesting: 'androidx.arch.core:core-testing:2.1.0'
         ]
 
         androidTestLibs = [
