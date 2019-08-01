@@ -58,7 +58,8 @@ allprojects {
                 junit        : 'junit:junit:4.13.1',
                 mockitoKotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
                 mockitoInline: "org.mockito:mockito-inline:2.28.2",
-                testShared: project(':testShared')
+                koinTest     : 'org.koin:koin-test:2.2.0-rc-4',
+                testShared   : project(':testShared')
         ]
 
         androidxTestLibs = [
