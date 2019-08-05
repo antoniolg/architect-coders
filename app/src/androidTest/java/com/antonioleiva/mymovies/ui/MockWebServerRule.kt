@@ -8,10 +8,6 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import kotlin.concurrent.thread
-import com.jakewharton.espresso.OkHttp3IdlingResource
-import androidx.test.espresso.IdlingResource
-
-
 
 class MockWebServerRule : TestRule {
 

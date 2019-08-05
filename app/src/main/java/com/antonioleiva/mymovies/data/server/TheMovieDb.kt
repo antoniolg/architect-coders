@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TheMovieDb(baseUrl: String) {
 
-    private val okHttpClient = HttpLoggingInterceptor().run {
+    val okHttpClient = HttpLoggingInterceptor().run {
         level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient.Builder().addInterceptor(this).build()
     }
