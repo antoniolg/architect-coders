@@ -11,6 +11,7 @@ import com.antonioleiva.mymovies.data.AndroidPermissionChecker
 import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
 import com.antonioleiva.mymovies.data.database.MovieDatabase
 import com.antonioleiva.mymovies.data.database.RoomDataSource
+import com.antonioleiva.mymovies.data.server.TheMovieDb
 import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.detail.DetailViewModel
@@ -41,10 +42,12 @@ private val appModule = module {
     single(named("apiKey")) { androidApplication().getString(R.string.api_key) }
     single { MovieDatabase.build(get()) }
     factory<LocalDataSource> { RoomDataSource(get()) }
-    factory<RemoteDataSource> { TheMovieDbDataSource() }
+    factory<RemoteDataSource> { TheMovieDbDataSource(get()) }
     factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
     factory<PermissionChecker> { AndroidPermissionChecker(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
+    single(named("baseUrl")) { "https://api.themoviedb.org/3/" }
+    single { TheMovieDb(get(named("baseUrl"))) }
 }
 
 val dataModule = module {
