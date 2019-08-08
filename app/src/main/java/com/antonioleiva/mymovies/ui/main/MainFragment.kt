@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -48,10 +47,8 @@ class MainFragment : Fragment() {
         viewModel = getViewModel { MainViewModel(MoviesRepository(app)) }
 
         viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { id ->
-            navController.navigate(
-                R.id.action_mainFragment_to_detailFragment,
-                bundleOf("id" to id)
-            )
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(id)
+            navController.navigate(action)
         })
 
         viewModel.requestLocationPermission.observe(viewLifecycleOwner, EventObserver {

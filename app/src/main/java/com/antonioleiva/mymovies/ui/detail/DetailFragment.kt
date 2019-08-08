@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.FragmentDetailBinding
 import com.antonioleiva.mymovies.model.server.MoviesRepository
@@ -16,6 +17,7 @@ class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
     private var binding: FragmentDetailBinding? = null
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +30,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = getViewModel {
-            DetailViewModel(arguments?.getInt("id", -1) ?: -1, MoviesRepository(app))
+            DetailViewModel(args.id, MoviesRepository(app))
         }
 
         binding?.apply {
