@@ -30,6 +30,14 @@ class MainActivity : AppCompatActivity() {
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         binding.recycler.adapter = adapter
         viewModel.model.observe(this, Observer(::updateUi))
+
+        viewModel.navigation.observe(this, Observer { event ->
+            event.getContentIfNotHandled()?.let {
+                startActivity<DetailActivity> {
+                    putExtra(DetailActivity.MOVIE, it)
+                }
+            }
+        })
     }
 
     private fun updateUi(model: UiModel) {
@@ -38,9 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         when (model) {
             is UiModel.Content -> adapter.movies = model.movies
-            is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.MOVIE, model.movie)
-            }
             UiModel.RequestLocationPermission -> coarsePermissionRequester.request {
                 viewModel.onCoarsePermissionRequested()
             }
