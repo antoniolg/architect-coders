@@ -10,7 +10,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, DataModule::class])
+@Component(modules = [AppModule::class, DataModule::class, ServerModule::class])
 interface MyMoviesComponent {
 
     fun plus(module: MainActivityModule): MainActivityComponent

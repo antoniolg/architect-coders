@@ -11,6 +11,7 @@ import com.antonioleiva.mymovies.data.AndroidPermissionChecker
 import com.antonioleiva.mymovies.data.PlayServicesLocationDataSource
 import com.antonioleiva.mymovies.data.database.MovieDatabase
 import com.antonioleiva.mymovies.data.database.RoomDataSource
+import com.antonioleiva.mymovies.data.server.TheMovieDb
 import com.antonioleiva.mymovies.data.server.TheMovieDbDataSource
 import dagger.Module
 import dagger.Provides
@@ -37,7 +38,7 @@ class AppModule {
     fun localDataSourceProvider(db: MovieDatabase): LocalDataSource = RoomDataSource(db)
 
     @Provides
-    fun remoteDataSourceProvider(): RemoteDataSource = TheMovieDbDataSource()
+    fun remoteDataSourceProvider(theMovieDB: TheMovieDb): RemoteDataSource = TheMovieDbDataSource(theMovieDB)
 
     @Provides
     fun locationDataSourceProvider(app: Application): LocationDataSource =
