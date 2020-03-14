@@ -1,0 +1,6 @@
+<!-- This is unmodified by default. We'll override it for tests -->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>
