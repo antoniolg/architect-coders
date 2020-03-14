@@ -36,6 +36,7 @@ class UiTest {
             )
 
     private lateinit var mockWebServer: MockWebServer
+    private lateinit var resource: OkHttp3IdlingResource
 
     @ExperimentalTime
     @Before
@@ -46,7 +47,7 @@ class UiTest {
 
         mockWebServer = component.mockWebServer
 
-        val resource = OkHttp3IdlingResource.create("OkHttp", component.movieDB.okHttpClient)
+        resource = OkHttp3IdlingResource.create("OkHttp", component.movieDB.okHttpClient)
         IdlingRegistry.getInstance().register(resource)
 
         val intent = Intent(instrumentation.targetContext, MainActivity::class.java)
@@ -79,6 +80,8 @@ class UiTest {
 
     @After
     fun tearDown(){
-       mockWebServer.close()
+        mockWebServer.close()
+        mockWebServer.shutdown()
+        IdlingRegistry.getInstance().unregister(resource)
     }
 }
