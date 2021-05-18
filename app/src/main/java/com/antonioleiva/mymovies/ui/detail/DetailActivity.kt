@@ -2,23 +2,23 @@ package com.antonioleiva.mymovies.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.databinding.ActivityDetailBinding
-import com.antonioleiva.mymovies.ui.common.app
-import com.antonioleiva.mymovies.ui.common.getViewModel
 import com.antonioleiva.mymovies.ui.common.loadUrl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val MOVIE = "DetailActivity:movie"
     }
 
-    private lateinit var component: DetailActivityComponent
-    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
+    private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: ActivityDetailBinding
 
     @SuppressLint("SetTextI18n")
@@ -26,8 +26,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        component = app.component.plus(DetailActivityModule(intent.getIntExtra(MOVIE, -1)))
 
         viewModel.model.observe(this, Observer(::updateUi))
 

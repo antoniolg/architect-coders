@@ -8,9 +8,12 @@ import com.antonioleiva.data.source.LocationDataSource
 import com.antonioleiva.data.source.RemoteDataSource
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DataModule {
 
     @Provides

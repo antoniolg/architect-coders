@@ -6,10 +6,14 @@ import com.antonioleiva.domain.Movie
 import com.antonioleiva.mymovies.ui.common.ScopedViewModel
 import com.antonioleiva.usecases.FindMovieById
 import com.antonioleiva.usecases.ToggleMovieFavorite
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
-class DetailViewModel(
-    private val movieId: Int,
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    @Named("movieId") private val movieId: Int,
     private val findMovieById: FindMovieById,
     private val toggleMovieFavorite: ToggleMovieFavorite
 ) :

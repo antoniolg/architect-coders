@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import com.antonioleiva.domain.Movie
 import com.antonioleiva.mymovies.ui.common.ScopedViewModel
 import com.antonioleiva.usecases.GetPopularMovies
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val getPopularMovies: GetPopularMovies) : ScopedViewModel() {
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
